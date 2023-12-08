@@ -1,0 +1,91 @@
+/* styles.css */
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    background-color: #5b795b;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+header a:hover{
+    color: blue;
+}
+header a{
+    color: #fff;
+}
+
+header h1 {
+    font-size: 36px;
+}
+
+header p {
+    font-size: 10px;
+}
+
+.section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.section:hover {
+    transform: scale(1.02);
+}
+
+#projects h3 a{
+    color: #5b795b;
+}
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h3{
+    color: #5b795b;
+    margin: 5px 0;
+}
+
+#skills ul {
+    margin-left: 25px;
+}
+
+li {
+    margin: 7px 0;
+    font-size: 15px;
+}
+
+.item {
+    margin: 25px 25px 0 25px;
+}
+
+.bold{
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.detail-utility{
+    font-size: 13px;
+    color: #737673;
+}
+/* Add more CSS for other sections as needed */
