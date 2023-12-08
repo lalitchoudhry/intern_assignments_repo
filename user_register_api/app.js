@@ -12,6 +12,7 @@ const User = require('./models/userModel');
 
 // helper
 const sendMail = require("./utils/sendMail");
+const auth = require('./utils/auth');
 
 app.use(express.json());
 app.use(cors());
@@ -22,20 +23,17 @@ app.get('/health', (req, res)=>{
 })
 
 // user register route
-app.post('/register', async(req, res, next)=>{
+app.post('/api/register', async(req, res, next)=>{
     try {
         const {username, email, password} = req.body;
-        console.log(req.body)
         if (!(username && email && password)) {
             return res.status(400).send("All input is required");
         }
 
         const oldUser = await User.findOne({ email });
         if (oldUser) {
-            console.log('409')
             return res.status(409).send("User Already Exist. Please Login");
         }
-        console.log('again')
         const encryptedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({
             username: username,
@@ -51,9 +49,8 @@ app.post('/register', async(req, res, next)=>{
 })
 
 // login user
-app.post('/login', async(req, res, next)=>{
+app.post('/api/login', async(req, res, next)=>{
     try {
-        console.log(req.body)
         const {username, password} = req.body;
         if (!(username && password)) {
             return res.status(400).json('All input is required')
@@ -78,9 +75,8 @@ app.post('/login', async(req, res, next)=>{
 })
 
 // forget_password
-app.post("/forget-password", async(req, res, next)=>{
+app.post("/api/forget-password", async(req, res, next)=>{
     try {
-        console.log(req.body)
         const {email} = req.body;
         if (!email) {
             return res.status(400).json("email is required");
@@ -90,9 +86,12 @@ app.post("/forget-password", async(req, res, next)=>{
         if (!user) {
             return res.status(400).json("Invalid User");
         }
-        const randomTokenString = "randomTokenString";
-        const updateToken = await User.updateOne({email: email}, {$set:{token: randomTokenString}})
-        sendMail(user.email, "Reset Password Mail", randomTokenString);
+        const token = jwt.sign(
+            { user_id: user._id },
+            process.env.TOKEN_KEY
+        );
+        const updateToken = await User.updateOne({email: email}, {$set:{token: token}})
+        sendMail(user, "Reset Password Mail", token);
         return res.status(200).json("Check Your Inbox");
 
     } catch (error) {
@@ -100,7 +99,8 @@ app.post("/forget-password", async(req, res, next)=>{
     }
 })
 
-app.get("/api/reset-password/:_id/:token", async(req, res, next)=>{
+// reset_password
+app.get("/api/reset-password/:_id/:token", auth, async(req, res, next)=>{
     try {
         const {_id, token} = req.params;
         const user = await User.findOne({token});
@@ -113,7 +113,7 @@ app.get("/api/reset-password/:_id/:token", async(req, res, next)=>{
     }
 })
 
-app.post("/api/reset-password/:id/:token", async(req, res, next)=>{
+app.post("/api/reset-password/:id/:token", auth, async(req, res, next)=>{
     try {
         const {id, token} = req.params;
         const user = await User.findOne({token});

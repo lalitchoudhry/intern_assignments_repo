@@ -2,7 +2,7 @@ const { config } = require("dotenv");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-const sendMail = async (email, subject, token) => {
+const sendMail = async (user, subject, token) => {
     try {
         const transporter = nodemailer.createTransport({
             service: "gmail",
@@ -14,9 +14,9 @@ const sendMail = async (email, subject, token) => {
 
         await transporter.sendMail({
             from: process.env.USER,
-            to: email,
+            to: user.email,
             subject: subject,
-            html: `<p>Hii your Reset Password <a href='${process.env.HOST}api/reset_password?token=${token}' >link is here</a></p>`,
+            html: `<p>Hii your Reset Password <a href='${process.env.HOST}api/reset-password/${user._id}/${token}' >link is here</a></p>`,
         });
 
         console.log("email sent sucessfully");
