@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-app.get('/health', (req, res)=>{
+app.get('/', (req, res)=>{
     res.send("Lalit is at home");
 })
 
