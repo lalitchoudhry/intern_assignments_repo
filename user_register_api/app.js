@@ -91,7 +91,7 @@ app.post("/api/forget-password", async(req, res, next)=>{
             process.env.TOKEN_KEY
         );
         const updateToken = await User.updateOne({email: email}, {$set:{token: token}})
-        sendMail(user, "Reset Password Mail", token);
+        await sendMail(user, "Reset Password Mail", token);
         return res.status(200).json("Check Your Inbox");
 
     } catch (error) {
