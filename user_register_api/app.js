@@ -10,6 +10,9 @@ const mongoose = require('./config/database');
 // database models
 const User = require('./models/userModel');
 
+// helper
+const sendMail = require("./utils/sendMail");
+
 app.use(express.json());
 app.use(cors());
 
@@ -71,6 +74,60 @@ app.post('/login', async(req, res, next)=>{
         res.status(400).json("Invalid Credential")
     } catch (err) {
         next(err);
+    }
+})
+
+// forget_password
+app.post("/forget-password", async(req, res, next)=>{
+    try {
+        console.log(req.body)
+        const {email} = req.body;
+        if (!email) {
+            return res.status(400).json("email is required");
+        }
+
+        const user = await User.findOne({email: email});
+        if (!user) {
+            return res.status(400).json("Invalid User");
+        }
+        const randomTokenString = "randomTokenString";
+        const updateToken = await User.updateOne({email: email}, {$set:{token: randomTokenString}})
+        sendMail(user.email, "Reset Password Mail", randomTokenString);
+        return res.status(200).json("Check Your Inbox");
+
+    } catch (error) {
+        next(error);
+    }
+})
+
+app.get("/api/reset-password/:_id/:token", async(req, res, next)=>{
+    try {
+        const {_id, token} = req.params;
+        const user = await User.findOne({token});
+        if (!user) {
+            return res.status(401).json("Invalid token")
+        }
+        res.status(200).send("<h1>Password Reset Page</h1>")
+    } catch (error) {
+        next(error)
+    }
+})
+
+app.post("/api/reset-password/:id/:token", async(req, res, next)=>{
+    try {
+        const {id, token} = req.params;
+        const user = await User.findOne({token});
+        if (!user) {
+            return res.status(401).json("Invalid token")
+        }
+
+        const newPassword = req.body.password;
+        const encryptedPassword = await bcrypt.hash(newPassword, 10);
+        const updatedUser = await User.findByIdAndUpdate({_id: user._id}, {$set:{password: encryptedPassword, token: ''}}, {new:true});
+        return res.status(201).json("Your Password is Reset successfuly");
+
+    } catch (error) {
+        next(error)
     }
 })
 
