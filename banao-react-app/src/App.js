@@ -1,9 +1,11 @@
 
+// all pages import
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
     <div className="App">
-      Hello react
+      <Home />
     </div>
   );
 }

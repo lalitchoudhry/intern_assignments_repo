@@ -1,0 +1,14 @@
+.container{
+    height: 100%;
+    width: 100%;
+}
+
+/* Feature card */
+.feature_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    margin: 3em;
+}
