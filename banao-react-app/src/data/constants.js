@@ -28,6 +28,38 @@ export const EXPLORE_TYPE = [
     }
 ]
 
+export const FOOTER_LINKS = [
+    {
+        head: "Hobbycue",
+        listItem:[
+            { label:"Abbout us", value:""},
+            { label:"Our Services", value:""},
+            { label:"Work with Us", value:""},
+            { label:"FAQ", value:""},
+            { label:"Contact Us", value:""}
+        ]
+    },
+    {
+        head: "How Do I",
+        listItem:[
+            { label:"Sign Up", value:"" },
+            { label:"Add a Listing", value:"" },
+            { label:"Claim Listing", value:"" },
+            { label:"Post a Query", value:"" },
+            { label:"Add a Blog Post", value:"" },
+            { label:"Other Queries", value:"" }
+        ]
+    },
+    {
+        head: "Quick Links",
+        listItem:[
+            { label:"Listings", value:"" },
+            { label:"Blog Posts", value:"" },
+            { label:"Shop / Store", value:"" },
+            { label:"Community", value:"" }
+        ]
+    }
+]
 
 export const FEATURE_TYPE = [
     { 
@@ -56,6 +88,33 @@ export const FEATURE_TYPE = [
         icon: programIcon,
         description: "Find events, meetups and workshops related to your hobby.  Register or buy tickets online.",
         btnName: "Attend",
+        value: ""
+    }
+]
+
+export const POST_TYPE = [
+    { 
+        label: "People",
+        icon: peopleIcon,
+        description: "An Individual or Organization.  Teacher, Coach, Professional or Online Seller.  Company, Business or Association.",
+        value: ""
+    },
+    {
+        label: "Place",
+        icon: placeIcon,
+        description: "An Address.  Classroom, Shop, Performance or Event Venue, Sports Arena, Play Area, Studio, School or Campus.",
+        value: ""
+    },
+    {
+        label: "Product",
+        icon: productIcon,
+        description: "An Item that you can Book, Buy or Rent.  Appointment, Ticket, or Voucher.  Equipment, Instrument or Activity Kit.",
+        value: ""
+    },
+    {
+        label: "Program",
+        icon: programIcon,
+        description: "An Event with Venue and Date.  Meetup, Workshop or Webinar.  Exhibition, Performance or Competition.",
         value: ""
     }
 ]

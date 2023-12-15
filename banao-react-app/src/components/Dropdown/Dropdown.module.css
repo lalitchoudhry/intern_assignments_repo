@@ -40,3 +40,7 @@
 
     font-size: .8em;
 }
+
+.show_dropdown{
+    display: none;
+}

@@ -18,6 +18,7 @@ import productCartIcon from './../../assets/icon/product-cart.png';
 // all components import
 import Button from '../Button/Button';
 import Dropdown from '../Dropdown/Dropdown';
+import SearchInput from '../SearchInput/SearchInput';
 
 function Header({toggleModel}) {
 
@@ -33,25 +34,23 @@ function Header({toggleModel}) {
   useEffect(() => {
     updateDimension();
     window.addEventListener("resize", updateDimension);
-    console.log(window.innerWidth);
   }, [])
 
   return (
     <div className={styles.container}>
       <img src={navLogo} alt="logo-img" className={styles.nav_logo} />
-      {showIcon ? <div className={styles.search_box}>
-        <input type="text" placeholder='Search here...' />
-        <div className={styles.search_icon_box}>
-          <img src={searchBtn} alt="search" />
-        </div>
-      </div>
+      {showIcon ? <SearchInput
+                    type="text"
+                    placeholder="Search here..."
+                    icon={searchBtn}
+      />
       : <div className={styles.mobile_search_icon}>
         <img src={searchBtn} alt="icon" />
       </div>}
       <div className={styles.nav_option_box}>
         {showIcon && <div className={styles.item}>
-          <Dropdown btnName="Explore" logoIcon={exploreIcon} listItem={EXPLORE_TYPE} />
-          <Dropdown btnName="Hobbies" logoIcon={hobbiesIcon} />
+          <Dropdown head="Explore" logoIcon={exploreIcon} listItem={EXPLORE_TYPE} />
+          <Dropdown head="Hobbies" logoIcon={hobbiesIcon} />
         </div>}
         <div className={styles.item}>
           <img src={bookmarkIcon} alt="icon" />
