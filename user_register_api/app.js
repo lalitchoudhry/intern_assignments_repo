@@ -166,7 +166,7 @@ app.post("/api/post", auth, async(req, res, next)=>{
 })
 
 // Update Post
-app.put("/api/post/:_id", async(req, res, next)=>{
+app.put("/api/post/:_id/:token", auth, async(req, res, next)=>{
     try {
         const {_id} = req.params;
         let body = req.body;
@@ -194,7 +194,7 @@ app.put("/api/post/:_id", async(req, res, next)=>{
 })
 
 // Delete Post
-app.delete("/api/post/:_id", async(req, res, next)=>{
+app.delete("/api/post/:_id", auth, async(req, res, next)=>{
     try {
         const {_id} = req.params;
         const post = await Post.findByIdAndDelete(_id);
