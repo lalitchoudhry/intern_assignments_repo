@@ -16,7 +16,7 @@ const sendMail = async (user, subject, token) => {
             from: process.env.USER,
             to: user.email,
             subject: subject,
-            html: `<p>Hii your Reset Password <a href='${process.env.HOST}api/reset-password/${user._id}/${token}' >link is here</a></p>`,
+            html: `<p>Hii your Reset Password <a href='${process.env.HOST}api/auth/reset-password/${user._id}/${token}' >link is here</a></p>`,
         });
 
         console.log("email sent sucessfully");
