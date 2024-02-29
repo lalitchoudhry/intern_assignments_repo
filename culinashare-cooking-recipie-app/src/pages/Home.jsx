@@ -89,7 +89,7 @@ function Home() {
           </div>
         </div>
         <div className='flex flex-wrap items-center justify-between'>
-          {(recipes.meals !== null) && (recipes.meals !== undefined) ? recipes.meals.map((item) => <RecipeCard key={item.idMeal} {...item} handleSavedRecipes={handleSavedRecipes}/>) : <div>Please Search Something Else ...</div>}
+          {(recipes.meals !== null) && (recipes.meals !== undefined) && recipes ? recipes.meals.map((item) => <RecipeCard key={item.idMeal} {...item} handleSavedRecipes={handleSavedRecipes}/>) : <div>Please Search Something Else ...</div>}
         </div>
       </section>
       <Footer />
