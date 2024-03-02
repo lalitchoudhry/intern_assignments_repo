@@ -24,7 +24,7 @@ It is a react web app that provide user to explore the meals and their recipes a
 
 ## Demo
 
-![App Screenshot]()
+![App Screenshot](https://github.com/lalitchoudhry/intern_assignments_repo/blob/culinashare-cooking-recipie-app/culinashare-cooking-recipie-app/src/assets/images/culinashare-intro.mp4)
 
 
 ## Author
