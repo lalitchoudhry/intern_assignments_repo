@@ -45,5 +45,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAddNewTask, setCompleteTask, setDeleteTask, setTaskByFilter } = authSlice.actions;
+export const { setTask, setAddNewTask, setCompleteTask, setDeleteTask, setTaskByFilter } = authSlice.actions;
 export default authSlice.reducer;

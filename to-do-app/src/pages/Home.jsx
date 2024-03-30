@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 // STATE IMPORTS
 import { useSelector, useDispatch } from "react-redux";
-import { setAddNewTask, setCompleteTask, setDeleteTask, setTaskByFilter } from "../state";
+import { setTask, setAddNewTask, setCompleteTask, setDeleteTask, setTaskByFilter } from "../state";
 
 // COMPONENTS IMPORTS
 import LeftSidebar from "../components/LeftSidebar";
@@ -88,7 +88,19 @@ const Home = () => {
 
   useEffect(() => {
     setTasks(allTasks)
+    if (allTasks.length !== 0) localStorage.setItem('tasks-by-takai', JSON.stringify(allTasks))
+    // localStorage.setItem('tasks-by-takai', JSON.stringify(allTasks))
+    
   }, [allTasks])
+
+  useEffect(() => {     //  ------- --------- ------- for fetch the data of groups
+    let localTask = JSON.parse(localStorage.getItem('tasks-by-takai'));
+
+    if (localTask !== null ) {
+      dispatch(setTask({tasks: localTask || []}))
+    }
+
+  }, [])
 
   return (
     <div className={`w-full h-full flex flex-col bg-primary-blue `}>
@@ -107,7 +119,7 @@ const Home = () => {
             </h3>
           </div>
           <div className="">
-            {tasks.length > 0 ?
+            {(tasks !== undefined) ?
               tasks.map((task) => (
                 <TaskBox
                   key={task.label}
